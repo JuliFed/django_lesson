@@ -11,7 +11,7 @@ def index(request):
 
 def create_task(request):
     if request.method == 'POST':
-        task = Task(text=request.POST.get('text'), checked=request.POST.get('checked', False))
+        task = Task(text=request.POST.get('text'), checked=bool(request.POST.get('checked')))
         task.save()
     return redirect('/tasks')
 
