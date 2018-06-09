@@ -5,13 +5,19 @@
     <title>Tasks</title>
 </head>
 <body>
-<ul>
-    {% for task in tasks %}
-    <li>
-        <input type="checkbox" {% if task.checked %} checked {% endif %}>
-        <p> {{ task.text }} </p>
-    </li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <input type="checkbox" {% if task.checked %} checked {% endif %}>
+            {{ task.text }}
+        </li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="tasks/create">
+        {% csrf_token %}
+        <input type="checkbox" name="checked">
+        <input name="text" type="text">
+        <button type="submit">Create task</button>
+    </form>
 </body>
 </html>
