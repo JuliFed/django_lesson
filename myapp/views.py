@@ -15,3 +15,11 @@ def create_task(request):
         task.save()
     return redirect('/tasks')
 
+
+def detail_task(request, pk):
+    try:
+        task = Task.objects.get(id=pk)
+        return render(request, 'myapp/task.html', {"task": task})
+    except Task.DoesNotExist:
+        return HttpResponse(status=404)
+

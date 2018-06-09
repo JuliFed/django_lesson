@@ -9,7 +9,7 @@
         {% for task in tasks %}
         <li>
             <input type="checkbox" {% if task.checked %} checked {% endif %}>
-            {{ task.text }}
+            <a href="/tasks/{{ task.id }}">{{ task.text }}</a>
         </li>
         {% endfor %}
     </ul>
