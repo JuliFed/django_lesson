@@ -3,6 +3,7 @@ import uuid
 
 
 class Task(models.Model):
+    # db_table = 'sgsdgf'
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     text = models.CharField(max_length=50)
     checked = models.BooleanField()
