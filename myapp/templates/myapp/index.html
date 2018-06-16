@@ -16,23 +16,18 @@
         <div class="panel-body">
             <form method="POST">
                 {% csrf_token %}
-                <!--{{ form.as_p }}-->
-                {% for field in form %}
-                    <div class="form-group">
-                        {% if field.name == "checked" %}
-                            {{ field }}
-                        {% else %}
-                            {{ field.label_tag }}
-                            {{ field }}
-                            <ul class="errors">
-                                {% for err in field.errors %}
-                                    <li class="error">{{ err | escape }}</li>
-                                {% endfor%}
-                            </ul>
-                        {% endif %}
-
-                    </div>
-                {% endfor %}
+                {{ form.as_p }}
+                <!--{% for field in form %}-->
+                    <!--<div class="form-group">-->
+                        <!--{{ field.label_tag }}-->
+                        <!--{{ field }}-->
+                        <!--<ul class="errors">-->
+                            <!--{% for err in field.errors %}-->
+                                <!--<li class="error">{{ err | escape }}</li>-->
+                            <!--{% endfor %}-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--{% endfor %}-->
 
                 <!--<label for="{{ form.text.id_for_label }}"></label>-->
                 <!--<input id="{{ form.text.id_for_label }}" value="{{ form.text.value }}"-->
