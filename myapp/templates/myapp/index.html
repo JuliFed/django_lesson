@@ -3,21 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <ul>
-        {% for task in tasks %}
-        <li>
-            <input type="checkbox" {% if task.checked %} checked {% endif %}>
-            <a href="/tasks/{{ task.id }}">{{ task.text }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <form method="POST" action="tasks/create">
-        {% csrf_token %}
-        <input type="checkbox" name="checked">
-        <input name="text" type="text">
-        <button type="submit">Create task</button>
-    </form>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>Create new task:</h2>
+            </div>
+        <div class="panel-body">
+            <form method="POST">
+                {% csrf_token %}
+                <!--{{ form.as_p }}-->
+                {% for field in form %}
+                    <div class="form-group">
+                        {% if field.name == "checked" %}
+                            {{ field }}
+                        {% else %}
+                            {{ field.label_tag }}
+                            {{ field }}
+                            <ul class="errors">
+                                {% for err in field.errors %}
+                                    <li class="error">{{ err | escape }}</li>
+                                {% endfor%}
+                            </ul>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+                <!--<label for="{{ form.text.id_for_label }}"></label>-->
+                <!--<input id="{{ form.text.id_for_label }}" value="{{ form.text.value }}"-->
+                       <!--{% if form.text.field.max_length %}-->
+                            <!--maxlength="{{form.text.field.max_length}}"-->
+                       <!--{% endif %}-->
+                       <!--name="{{ form.text.html_name }}"-->
+                <!--&gt;-->
+
+
+
+                <button type="submit">Create task</button>
+            </form>
+        </div>
+        </div>
+        <ul>
+            {% for task in tasks %}
+            <li>
+                <input type="checkbox" {% if task.checked %} checked {% endif %}>
+                <a href="/tasks/{{ task.id }}">{{ task.text }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

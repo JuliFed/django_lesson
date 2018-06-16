@@ -22,9 +22,8 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^tasks$', views.index),
-    url(r'^tasks/(?P<pk>[0-9a-f\-]+)$', views.detail_task),
-    url(r'^tasks/create$', views.create_task),
+    url(r'^tasks/$', views.index),
+    url(r'^tasks/(?P<pk>[0-9a-f\-]+)/$', views.detail_task),
 ]
 
 if settings.DEBUG:

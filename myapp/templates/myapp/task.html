@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ task.text }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <input type="checkbox" {% if task.checked %} checked {% endif %}>
-    {{ task.text }}
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>
+                    <a href="/tasks" style="color:#fff;">Назад</a> | Detail:</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -125,6 +125,10 @@ STATIC_URL = '/static/'
 
 INTERNAL_IPS = '127.0.0.1'
 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     '/static/',
+# ]
 
 def show_toolbar(request):
     return True
