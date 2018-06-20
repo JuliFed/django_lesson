@@ -23,8 +23,9 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # url(r'^tasks/$', views.index),
-    url(r'^tasks/$', views.TasksView.as_view()),
-    url(r'^tasks/(?P<pk>[0-9a-f\-]+)/$', views.detail_task),
+    url(r'^tasks/$', views.TasksListView.as_view()),
+    url(r'^tasks/(?P<pk>[0-9a-f\-]+)/$', views.TaskDetailView.as_view()),
+    url(r'^tasks/$', views.TaskFormView.as_view(), 'tasks_detail'),
 ]
 
 if settings.DEBUG:

@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Task
 from .forms import TaskModelForm
 from django.views.generic import TemplateView, View
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 
 
 def index(request):
@@ -44,11 +46,44 @@ class TasksView(View):
 
     def post(self, request, pk=None):
         form = TaskModelForm(request.POST)
-        print('OK')
         if form.is_valid():
             form.save(commit=True)
-            print(form)
             return redirect('/tasks')
         else:
             tasks = Task.objects.all()
             return render(request, 'myapp/index.html', {"tasks": tasks, "form": form})
+
+
+class TasksListView(ListView):
+    model = Task
+    template_name = 'myapp/index.html'
+    context_object_name = 'tasks'
+    # paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        data = super().get_context_data()
+        data["form"] = TaskModelForm()
+        return data
+
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'myapp/task.html'
+
+    # def get_object(self, queryset=None):
+    #     obj = super().get_queryset(self.request)
+    #     return obj
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data()
+        data["form"] = TaskModelForm(instance=self.object)
+        return data
+
+
+class TaskFormView(FormView):
+    form_class = TaskModelForm
+    #для простых форм
+
+
+
+
